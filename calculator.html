@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+
+
+
+
+<p>coded by strawberry_koko</p>
+<div style="max-width:70%; text-align:center;margin-left:auto ;margin-right:auto">
+<div style="display: grid; grid-gap:10%; 
+  grid-auto-flow: column;">
+  	<p>Hero Trait</p>
+	<input type="text" id="herotrait" hidden>
+	<div style="display: grid; grid-gap:10%; 
+  grid-auto-flow: row;">
+		<button onclick = "hero1()" id="hero1">Fire</button>
+		<button onclick = "hero2()" id="hero2">Earth</button>
+		<button onclick = "hero3()" id="hero3">Lightning</button>
+		<button onclick = "hero4()" id="hero4">Water</button>
+	</div>
+	<p>Hero power</p>
+	<input type="text" id="heropower">
+	<br><br>
+</div>
+<br>
+
+<br><br>
+<hr size="8" color = "black">  
+<div style="display: grid; grid-gap:10%; 
+  grid-auto-flow: column;">
+	<p>Weapon Trait</p>
+	<input type="text" id="weapontrait" hidden>
+	<div style="display: grid; grid-gap:10%; 
+  grid-auto-flow: row;">
+		<button onclick = "weapon1()" id="weapon1">Fire</button>
+		<button onclick = "weapon2()" id="weapon2">Earth</button>
+		<button onclick = "weapon3()" id="weapon3">Lightning</button>
+		<button onclick = "weapon4()" id="weapon4">Water</button>
+	</div>
+	<p>Weapon Bonus Power</p>
+	<input type="text" id="bonuspower" value = "0">
+</div>
+<br><br>
+<hr size="8" color = "black">  
+
+	<div style="display: grid; grid-gap:5%; 
+  grid-auto-flow: column; ">
+
+
+    		<div style="display: grid; grid-gap:2%; 
+  grid-auto-flow: row;">
+	<p>Weapon stat 1 trait</p>
+	<input type="text" id="stat1trait" hidden>
+		<button onclick = "stat11()" id="stat11">Fire</button>
+		<button onclick = "stat12()" id="stat12">Earth</button>
+		<button onclick = "stat13()" id="stat13">Lightning</button>
+		<button onclick = "stat14()" id="stat14">Water</button>
+		<button onclick = "stat15()" id="stat15">Power</button>
+		<p>Weapon stat 1 value</p>
+		<input type="text" id="stat1value" value = "0" >
+		<p id="percent1">0%</p>
+	</div>
+
+
+  		<div style="display: grid; grid-gap:2%; 
+  grid-auto-flow: row;">
+	<p>Weapon stat 2 trait</p>
+	<input type="text" id="stat2trait" hidden>
+
+		<button onclick = "stat21()" id="stat21">Fire</button>
+		<button onclick = "stat22()" id="stat22">Earth</button>
+		<button onclick = "stat23()" id="stat23">Lightning</button>
+		<button onclick = "stat24()" id="stat24">Water</button>
+		<button onclick = "stat25()" id="stat25">Power</button>
+		<p>Weapon stat 2 value</p>
+	<input type="text" id="stat2value" value = "0" >
+	<p id="percent2">0%</p>
+
+	</div>
+
+
+	<input type="text" id="stat3trait" hidden>
+		<div style="display: grid; grid-gap:2%; 
+  grid-auto-flow: row;">
+  	<p>Weapon stat 3 trait</p>
+		<button onclick = "stat31()" id="stat31">Fire</button>
+		<button onclick = "stat32()" id="stat32">Earth</button>
+		<button onclick = "stat33()" id="stat33">Lightning</button>
+		<button onclick = "stat34()" id="stat34">Water</button>
+		<button onclick = "stat35()" id="stat35">Power</button>
+		<p>Weapon stat 3 value</p>
+	<input type="text" id="stat3value" value = "0">
+	<p id="percent3">0%</p>
+	</div>
+
+</div>
+<br><br><br><br>
+
+	<p id="totalpercent">Total: 0%</p>
+	<button onclick="calculatepercet()">calculate percent</button>
+
+
+<hr size="8" color = "black">  
+<div style="display: grid; grid-gap:10%; 
+  grid-auto-flow: column;">
+	<p>Enemy Trait</p>
+	<input type="text" id="enemytrait" hidden>
+	<div style="display: grid; grid-gap:10%; 
+  grid-auto-flow: row;">
+		<button onclick = "enemy1()" id="enemy1">Fire</button>
+		<button onclick = "enemy2()" id="enemy2">Earth</button>
+		<button onclick = "enemy3()" id="enemy3">Lightning</button>
+		<button onclick = "enemy4()" id="enemy4">Water</button>
+	</div>
+	<p>Enemy power</p>  
+	<input type="text" id="enemypower">
+</div>
+
+
+<br><br>
+<hr size="8" color = "black"> 
+<br><br>
+<button onclick="myFunction()" style="width:150px;height:100px;font-size: 20px">Calculate</button>
+<h1 id ="probability" style="font-size: 50px"> 0% </h1> 
+<p id ="minRoll"></p>
+<p id ="maxRoll"></p>
+<p id ="enemyMin"></p>
+<p id ="enemyMax"></p>
+<p id ="totalbattle"></p>
+<p id ="wins"></p>
+<p id ="lose"></p>
+	</div>
+</body>
+<script type="text/javascript">
+	function calculatepercet()
+	{
+		var herotrait = document.getElementById('herotrait').value;
+		var weapontrait = document.getElementById('weapontrait').value;
+		var stat1trait = document.getElementById('stat1trait').value;
+		var stat1value = document.getElementById('stat1value').value;
+		var x1 = Math.ceil( stat1value*getm(herotrait,stat1trait)*100 * 100)/100;
+		document.getElementById('percent1').innerHTML =x1 + "%";
+				var stat2trait = document.getElementById('stat2trait').value;
+		var stat2value = document.getElementById('stat2value').value;
+		var x2 = Math.ceil(stat2value*getm(herotrait,stat2trait)*100 * 100)/100;
+		document.getElementById('percent2').innerHTML =x2  + "%";
+				var stat3trait = document.getElementById('stat3trait').value;
+		var stat3value = document.getElementById('stat3value').value;
+		var x3 = Math.ceil(stat3value*getm(herotrait,stat3trait)*100* 100)/100;
+		document.getElementById('percent3').innerHTML =x3  + "%";
+		var wew = x1+x2+x3
+		document.getElementById('totalpercent').innerHTML = "Total: " + wew +" %"
+	}
+
+
+	function hero1()
+	{
+		document.getElementById('hero1').style.background='#808080';
+		document.getElementById('hero2').style.background='#ADD8E6';
+		document.getElementById('hero3').style.background='#ADD8E6';
+		document.getElementById('hero4').style.background='#ADD8E6';
+		document.getElementById('herotrait').value = "fire"
+	}
+	function hero2()
+	{
+		document.getElementById('hero1').style.background='#ADD8E6';
+		document.getElementById('hero2').style.background='#808080';
+		document.getElementById('hero3').style.background='#ADD8E6';
+		document.getElementById('hero4').style.background='#ADD8E6';
+		document.getElementById('herotrait').value = "earth"
+	}
+	function hero3()
+	{
+		document.getElementById('hero1').style.background='#ADD8E6';
+		document.getElementById('hero2').style.background='#ADD8E6';
+		document.getElementById('hero3').style.background='#808080';
+		document.getElementById('hero4').style.background='#ADD8E6';
+		document.getElementById('herotrait').value = "lightning"
+	}
+	function hero4()
+	{
+		document.getElementById('hero1').style.background='#ADD8E6';
+		document.getElementById('hero2').style.background='#ADD8E6';
+		document.getElementById('hero3').style.background='#ADD8E6';
+		document.getElementById('hero4').style.background='#808080';
+		document.getElementById('herotrait').value = "water"
+	}
+	function weapon1()
+	{
+		document.getElementById('weapon1').style.background='#808080';
+		document.getElementById('weapon2').style.background='#ADD8E6';
+		document.getElementById('weapon3').style.background='#ADD8E6';
+		document.getElementById('weapon4').style.background='#ADD8E6';
+		document.getElementById('weapontrait').value = "fire"
+	}
+	function weapon2()
+	{
+		document.getElementById('weapon1').style.background='#ADD8E6';
+		document.getElementById('weapon2').style.background='#808080';
+		document.getElementById('weapon3').style.background='#ADD8E6';
+		document.getElementById('weapon4').style.background='#ADD8E6';
+		document.getElementById('weapontrait').value = "earth"
+	}
+	function weapon3()
+	{
+		document.getElementById('weapon1').style.background='#ADD8E6';
+		document.getElementById('weapon2').style.background='#ADD8E6';
+		document.getElementById('weapon3').style.background='#808080';
+		document.getElementById('weapon4').style.background='#ADD8E6';
+		document.getElementById('weapontrait').value = "lightning"
+	}
+	function weapon4()
+	{
+		document.getElementById('weapon1').style.background='#ADD8E6';
+		document.getElementById('weapon2').style.background='#ADD8E6';
+		document.getElementById('weapon3').style.background='#ADD8E6';
+		document.getElementById('weapon4').style.background='#808080';
+		document.getElementById('weapontrait').value = "water"
+	}
+	function stat11()
+	{
+		document.getElementById('stat11').style.background='#808080';
+		document.getElementById('stat12').style.background='#ADD8E6';
+		document.getElementById('stat13').style.background='#ADD8E6';
+		document.getElementById('stat14').style.background='#ADD8E6';
+		document.getElementById('stat1trait').value = "fire"
+		document.getElementById('stat15').style.background='#ADD8E6';
+	}
+	function stat12()
+	{
+		document.getElementById('stat11').style.background='#ADD8E6';
+		document.getElementById('stat12').style.background='#808080';
+		document.getElementById('stat13').style.background='#ADD8E6';
+		document.getElementById('stat14').style.background='#ADD8E6';
+		document.getElementById('stat1trait').value = "earth"
+		document.getElementById('stat15').style.background='#ADD8E6';
+	}
+	function stat13()
+	{
+		document.getElementById('stat11').style.background='#ADD8E6';
+		document.getElementById('stat12').style.background='#ADD8E6';
+		document.getElementById('stat13').style.background='#808080';
+		document.getElementById('stat14').style.background='#ADD8E6';
+		document.getElementById('stat1trait').value = "lightning"
+		document.getElementById('stat15').style.background='#ADD8E6';
+	}
+	function stat14()
+	{
+		document.getElementById('stat11').style.background='#ADD8E6';
+		document.getElementById('stat12').style.background='#ADD8E6';
+		document.getElementById('stat13').style.background='#ADD8E6';
+		document.getElementById('stat14').style.background='#808080';
+		document.getElementById('stat1trait').value = "water"
+		document.getElementById('stat15').style.background='#ADD8E6';
+	}
+		function stat15()
+	{
+		document.getElementById('stat11').style.background='#ADD8E6';
+		document.getElementById('stat12').style.background='#ADD8E6';
+		document.getElementById('stat13').style.background='#ADD8E6';
+		document.getElementById('stat14').style.background='#ADD8E6';
+		document.getElementById('stat15').style.background='#808080';
+		document.getElementById('stat1trait').value = "power"
+	}
+	function stat21()
+	{
+		document.getElementById('stat21').style.background='#808080';
+		document.getElementById('stat22').style.background='#ADD8E6';
+		document.getElementById('stat23').style.background='#ADD8E6';
+		document.getElementById('stat24').style.background='#ADD8E6';
+		document.getElementById('stat2trait').value = "fire"
+		document.getElementById('stat25').style.background='#ADD8E6';
+	}
+	function stat22()
+	{
+		document.getElementById('stat21').style.background='#ADD8E6';
+		document.getElementById('stat22').style.background='#808080';
+		document.getElementById('stat23').style.background='#ADD8E6';
+		document.getElementById('stat24').style.background='#ADD8E6';
+		document.getElementById('stat2trait').value = "earth"
+		document.getElementById('stat25').style.background='#ADD8E6';
+	}
+	function stat23()
+	{
+		document.getElementById('stat21').style.background='#ADD8E6';
+		document.getElementById('stat22').style.background='#ADD8E6';
+		document.getElementById('stat23').style.background='#808080';
+		document.getElementById('stat24').style.background='#ADD8E6';
+		document.getElementById('stat2trait').value = "lightning"
+		document.getElementById('stat25').style.background='#ADD8E6';
+	}
+	function stat24()
+	{
+		document.getElementById('stat21').style.background='#ADD8E6';
+		document.getElementById('stat22').style.background='#ADD8E6';
+		document.getElementById('stat23').style.background='#ADD8E6';
+		document.getElementById('stat24').style.background='#808080';
+		document.getElementById('stat2trait').value = "water"
+		document.getElementById('stat25').style.background='#ADD8E6';
+	}
+	function stat25()
+	{
+		document.getElementById('stat21').style.background='#ADD8E6';
+		document.getElementById('stat22').style.background='#ADD8E6';
+		document.getElementById('stat23').style.background='#ADD8E6';
+		document.getElementById('stat24').style.background='#ADD8E6';
+		document.getElementById('stat25').style.background='#808080';
+		document.getElementById('stat2trait').value = "power"
+	}
+	function stat31()
+	{
+		document.getElementById('stat31').style.background='#808080';
+		document.getElementById('stat32').style.background='#ADD8E6';
+		document.getElementById('stat33').style.background='#ADD8E6';
+		document.getElementById('stat34').style.background='#ADD8E6';
+		document.getElementById('stat3trait').value = "fire"
+		document.getElementById('stat35').style.background='#ADD8E6';
+	}
+	function stat32()
+	{
+		document.getElementById('stat31').style.background='#ADD8E6';
+		document.getElementById('stat32').style.background='#808080';
+		document.getElementById('stat33').style.background='#ADD8E6';
+		document.getElementById('stat34').style.background='#ADD8E6';
+		document.getElementById('stat3trait').value = "earth"
+		document.getElementById('stat35').style.background='#ADD8E6';
+	}
+	function stat33()
+	{
+		document.getElementById('stat31').style.background='#ADD8E6';
+		document.getElementById('stat32').style.background='#ADD8E6';
+		document.getElementById('stat33').style.background='#808080';
+		document.getElementById('stat34').style.background='#ADD8E6';
+		document.getElementById('stat35').style.background='#ADD8E6';
+		document.getElementById('stat3trait').value = "lightning"
+	}
+	function stat34()
+	{
+		document.getElementById('stat31').style.background='#ADD8E6';
+		document.getElementById('stat32').style.background='#ADD8E6';
+		document.getElementById('stat33').style.background='#ADD8E6';
+		document.getElementById('stat34').style.background='#808080';
+		document.getElementById('stat35').style.background='#ADD8E6';
+		document.getElementById('stat3trait').value = "water"
+	}
+	function stat35()
+	{
+		document.getElementById('stat31').style.background='#ADD8E6';
+		document.getElementById('stat32').style.background='#ADD8E6';
+		document.getElementById('stat33').style.background='#ADD8E6';
+		document.getElementById('stat34').style.background='#ADD8E6';
+		document.getElementById('stat35').style.background='#808080';
+		document.getElementById('stat3trait').value = "power"
+	}
+	function enemy1()
+	{
+		document.getElementById('enemy1').style.background='#808080';
+		document.getElementById('enemy2').style.background='#ADD8E6';
+		document.getElementById('enemy3').style.background='#ADD8E6';
+		document.getElementById('enemy4').style.background='#ADD8E6';
+		document.getElementById('enemytrait').value = "fire"
+	}
+	function enemy2()
+	{
+		document.getElementById('enemy1').style.background='#ADD8E6';
+		document.getElementById('enemy2').style.background='#808080';
+		document.getElementById('enemy3').style.background='#ADD8E6';
+		document.getElementById('enemy4').style.background='#ADD8E6';
+		document.getElementById('enemytrait').value = "earth"
+	}
+	function enemy3()
+	{
+		document.getElementById('enemy1').style.background='#ADD8E6';
+		document.getElementById('enemy2').style.background='#ADD8E6';
+		document.getElementById('enemy3').style.background='#808080';
+		document.getElementById('enemy4').style.background='#ADD8E6';
+		document.getElementById('enemytrait').value = "lightning"
+	}
+	function enemy4()
+	{
+		document.getElementById('enemy1').style.background='#ADD8E6';
+		document.getElementById('enemy2').style.background='#ADD8E6';
+		document.getElementById('enemy3').style.background='#ADD8E6';
+		document.getElementById('enemy4').style.background='#808080';
+		document.getElementById('enemytrait').value = "water"
+	}
+	function char1()
+	{
+		document.getElementById('char1').style.background='#808080';
+		document.getElementById('char2').style.background='#ADD8E6';
+		document.getElementById('char3').style.background='#ADD8E6';
+		document.getElementById('char4').style.background='#ADD8E6';
+		document.getElementById('char5').style.background='#ADD8E6';
+		document.getElementById('char6').style.background='#ADD8E6';
+		document.getElementById('heropower').value = "5280";
+		document.getElementById('herotrait').value = "fire";
+	}
+	function char2()
+	{
+		document.getElementById('char1').style.background='#ADD8E6';
+		document.getElementById('char2').style.background='#808080';
+		document.getElementById('char3').style.background='#ADD8E6';
+		document.getElementById('char4').style.background='#ADD8E6';
+		document.getElementById('char5').style.background='#ADD8E6';
+		document.getElementById('char6').style.background='#ADD8E6';
+		document.getElementById('heropower').value = "5200";
+		document.getElementById('herotrait').value = "fire";
+	}
+	function char3()
+	{
+		document.getElementById('char1').style.background='#ADD8E6';
+		document.getElementById('char2').style.background='#ADD8E6';
+		document.getElementById('char3').style.background='#808080';
+		document.getElementById('char4').style.background='#ADD8E6';
+		document.getElementById('char5').style.background='#ADD8E6';
+		document.getElementById('char6').style.background='#ADD8E6';
+		document.getElementById('heropower').value = "5240";
+		document.getElementById('herotrait').value = "lightning";	
+	}
+	function char4()
+	{
+		document.getElementById('char1').style.background='#ADD8E6';
+		document.getElementById('char2').style.background='#ADD8E6';
+		document.getElementById('char3').style.background='#ADD8E6';
+		document.getElementById('char4').style.background='#808080';
+		document.getElementById('char5').style.background='#ADD8E6';
+		document.getElementById('char6').style.background='#ADD8E6';
+		document.getElementById('heropower').value = "5200";
+		document.getElementById('herotrait').value = "lightning";	}
+	function char5()
+	{
+		document.getElementById('char1').style.background='#ADD8E6';
+		document.getElementById('char2').style.background='#ADD8E6';
+		document.getElementById('char3').style.background='#ADD8E6';
+		document.getElementById('char4').style.background='#ADD8E6';
+		document.getElementById('char5').style.background='#808080';
+		document.getElementById('char6').style.background='#ADD8E6';
+		document.getElementById('heropower').value = "5240";
+		document.getElementById('herotrait').value = "water";	}
+
+	function char6()
+	{
+		document.getElementById('char1').style.background='#ADD8E6';
+		document.getElementById('char2').style.background='#ADD8E6';
+		document.getElementById('char3').style.background='#ADD8E6';
+		document.getElementById('char4').style.background='#ADD8E6';
+		document.getElementById('char5').style.background='#ADD8E6';
+		document.getElementById('char6').style.background='#808080';
+		document.getElementById('heropower').value = "5200";
+		document.getElementById('herotrait').value = "water";		
+	}
+
+
+
+	function getm(chartrait,stattrait)
+	{
+		if (chartrait == stattrait)
+		{
+			return 0.002675;
+		}
+		else if(stattrait == "power")
+		{
+			return 0.002575;
+		}
+		else if (stattrait == "")
+		{
+			return 0;
+		}
+		else
+		{
+			return 0.0025;
+		}
+	}
+	function gettraitbonus(chartrait,weapontrait,enemytrait)
+	{
+		var answer = 1;
+		if(chartrait == weapontrait)
+		{
+			answer += 0.075;
+		}
+		if(chartrait == "fire")
+		{
+			if (enemytrait == "earth")
+			{
+				answer += 0.075;
+			}
+			else if(enemytrait == "water")
+			{
+				answer -= 0.075;
+			}
+		}
+		else if(chartrait == "earth")
+		{
+			if (enemytrait =="lightning" ){
+				answer += 0.075;
+			}
+			else if(enemytrait == "fire"){
+				answer -= 0.075;
+			}
+		}
+		else if (chartrait == "lightning")
+		{
+			if (enemytrait =="water" ){
+				answer += 0.075;
+			}
+			else if(enemytrait == "earth"){
+				answer -= 0.075;
+			}
+		}
+
+		else if (chartrait == "water")
+		{
+			if (enemytrait =="fire" ){
+				answer += 0.075;
+			}
+			else if(enemytrait == "lightning"){
+				answer -= 0.075;
+			}
+		}
+		return answer;
+	}
+
+	function myFunction()
+	{
+		console.log("---------------------------------------------------------");
+		var heropower =document.getElementById('heropower').value;
+		var herotrait = document.getElementById('herotrait').value;
+		var weapontrait = document.getElementById('weapontrait').value;
+		var bonuspower = document.getElementById('bonuspower').value;
+		var stat1trait = document.getElementById('stat1trait').value;
+		var stat2trait = document.getElementById('stat2trait').value;
+		var stat3trait = document.getElementById('stat3trait').value;
+		var stat1value = document.getElementById('stat1value').value;
+		var stat2value = document.getElementById('stat2value').value;
+		var stat3value = document.getElementById('stat3value').value;
+		var enemypower =document.getElementById('enemypower').value;
+		var enemytrait = document.getElementById('enemytrait').value;
+		const weapstats = [stat1trait,stat2trait,stat3trait]
+		const weapvals = [stat1value,stat2value,stat3value]
+		var weapontesting = 1;
+		var i = 0;
+		while (i < 3)
+		{
+			weapontesting = weapontesting + (weapvals[i]*getm(herotrait,weapstats[i]));
+			console.log(("per stat: ") + weapvals[i]*getm(herotrait,weapstats[i]))
+			i = i + 1;
+		}
+		console.log("weapontesting " + weapontesting);
+		console.log("weapontesting " + heropower);
+		console.log("bonuspower " + bonuspower);
+		var alignedpower = (weapontesting*heropower)+ parseInt(bonuspower);
+		console.log("alignedpower " + alignedpower);
+		var traitbonus = gettraitbonus(herotrait,weapontrait,enemytrait);
+		console.log("traitbonus " + traitbonus);
+		var playerbaseroll = alignedpower*traitbonus
+		var minRoll = parseInt((playerbaseroll * 0.9)-1);
+		var maxRoll = parseInt((playerbaseroll * 1.1)-1);
+		var enemyMin = parseInt((enemypower * 0.9));
+		var enemyMax = parseInt((enemypower * 1.1));
+		console.log("minRoll " + minRoll);
+		console.log("maxRoll " + maxRoll);
+		console.log("enemyMin " + enemyMin);
+		console.log("enemyMax " + enemyMax);
+		
+		var lose = 0;
+		var win = 0;
+		i = enemyMin;
+		while (i < (enemyMax+1))
+		{
+			j = minRoll;
+			while (j < (maxRoll + 1))
+			{
+				if (i > j)
+				{
+					lose = lose + 1;
+				}
+				else
+				{
+					win = win + 1;
+				}
+				j = j + 1;
+			}
+
+			i = i + 1;
+		}
+		var total = lose + win;
+		console.log("total " + total);
+		console.log("win " + win);
+		console.log("lose " + lose);
+		document.getElementById('minRoll').innerHTML = "Player minRoll: " + minRoll;
+		document.getElementById('maxRoll').innerHTML = "Player maxRoll: " + maxRoll;
+		document.getElementById('enemyMin').innerHTML = "Enemy minRoll: " + enemyMin;
+		document.getElementById('enemyMax').innerHTML = "Enemy maxRoll: " + enemyMax;
+ 		var probability = (win/total)*100;
+		document.getElementById('totalbattle').innerHTML = "Total battles simulated: " + total;
+		document.getElementById('wins').innerHTML = "Total battles won: " + win;
+		document.getElementById('lose').innerHTML = "Total battles lost: " + lose;
+		var answer = document.getElementById('probability');
+		answer.innerHTML = probability.toFixed() + "%";
+
+	}
+
+</script>
+</html>
